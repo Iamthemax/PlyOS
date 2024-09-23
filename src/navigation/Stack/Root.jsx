@@ -12,6 +12,10 @@ import Userprofile from '../../components/Userprofile';
 import Login from '../../components/Login';
 import Notification from '../../components/Notification';
 import Register from '../../components/Register';
+import TermsAndConditions from '../../components/TermsAndConditions';
+import Privacy from '../../components/Privacy';
+import LegalAbouts from '../../components/LegalAbouts';
+import Aboutus from '../../components/Aboutus';
 // import AddFlashSale from '../../components/AddFlashSale';
 // import AddProducts from '../../components/AddProducts';
 // import AddPromotions from '../../components/AddPromotion';
@@ -200,6 +204,39 @@ export default function RootStack() {
               }}
               name="Register"
               component={Register}
+            />
+
+       <Stack.Screen
+              options={{
+                headerShown: false,
+                gestureDirection: 'horizontal',
+              }}
+              name="TermsAndConditions"
+              component={TermsAndConditions}
+            />
+             <Stack.Screen
+              options={{
+                headerShown: false,
+                gestureDirection: 'horizontal',
+              }}
+              name="Privacy"
+              component={Privacy}
+            />
+              <Stack.Screen
+              options={{
+                headerShown: false,
+                gestureDirection: 'horizontal',
+              }}
+              name="Aboutus"
+              component={Aboutus}
+            />
+               <Stack.Screen
+              options={{
+                headerShown: false,
+                gestureDirection: 'horizontal',
+              }}
+              name="LegalAbouts"
+              component={LegalAbouts}
             />
 
               {/* 
