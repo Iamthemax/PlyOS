@@ -4,6 +4,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { createContext, useEffect, useMemo, useState } from 'react';
 import { axiosApiInstance } from '../../../App';
 import Test from '../../components/Test';
+import { BottomTabNavigator } from '../BottomBar/BottomBar';
+import Verifymobilenumber from '../../components/Verifymobilenumber';
+import Filtercategory from '../../components/Filtercategory';
+import Home from '../../components/Home';
+import Userprofile from '../../components/Userprofile';
+import Login from '../../components/Login';
+import Notification from '../../components/Notification';
+import Register from '../../components/Register';
 // import AddFlashSale from '../../components/AddFlashSale';
 // import AddProducts from '../../components/AddProducts';
 // import AddPromotions from '../../components/AddPromotion';
@@ -121,11 +129,10 @@ export default function RootStack() {
                 gestureDirection: 'horizontal',
               }}
               name="Test"
-              component={Test}
+              component={BottomTabNavigator}
             />
-          {/* <Stack.Navigator initialRouteName="Writeareview"> */}
-            
-          {/* <Stack.Screen
+        
+     <Stack.Screen
               options={{
                 headerShown: false,
                 gestureDirection: 'horizontal',
@@ -141,6 +148,8 @@ export default function RootStack() {
               name="Login"
               component={Login}
             />
+                   
+        
             <Stack.Screen
               options={{
                 headerShown: false,
@@ -167,6 +176,33 @@ export default function RootStack() {
               name="Home"
               component={Home}
             />
+
+<Stack.Screen
+              options={{
+                headerShown: false,
+                gestureDirection: 'horizontal',
+              }}
+              name="Userprofile"
+              component={Userprofile}
+            />
+             <Stack.Screen
+              options={{
+                headerShown: false,
+                gestureDirection: 'horizontal',
+              }}
+              name="Notification"
+              component={Notification}
+            />
+             <Stack.Screen
+              options={{
+                headerShown: false,
+                gestureDirection: 'horizontal',
+              }}
+              name="Register"
+              component={Register}
+            />
+
+              {/* 
             <Stack.Screen
               options={{
                 headerShown: false,
