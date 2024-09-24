@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import {Image, Pressable, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import CustomColors from '../../styles/CustomColors';
 
 export default function Header(props) {
@@ -21,7 +21,7 @@ export default function Header(props) {
         <Text style={styles.categry}>Product Name</Text>
       )}
 
-      <Icon onPress={()=>navigation.goBack()} style={styles.iconStyle} name='arrow-left' color={CustomColors.mattBrownDark} size={wp(8)}/>
+      <MaterialCommunityIcons onPress={()=>navigation.goBack()} style={styles.iconStyle} name='arrow-left' color={CustomColors.mattBrownDark} size={wp(8)}/>
     </View>
   );
 }

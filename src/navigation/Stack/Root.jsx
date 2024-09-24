@@ -16,6 +16,8 @@ import TermsAndConditions from '../../components/TermsAndConditions';
 import Privacy from '../../components/Privacy';
 import LegalAbouts from '../../components/LegalAbouts';
 import Aboutus from '../../components/Aboutus';
+import VerifyOtp from '../../components/VerifyOtp';
+import Userprofile1 from '../../components/Userprofile1';
 // import AddFlashSale from '../../components/AddFlashSale';
 // import AddProducts from '../../components/AddProducts';
 // import AddPromotions from '../../components/AddPromotion';
@@ -238,7 +240,22 @@ export default function RootStack() {
               name="LegalAbouts"
               component={LegalAbouts}
             />
-
+  <Stack.Screen
+              options={{
+                headerShown: false,
+                gestureDirection: 'horizontal',
+              }}
+              name="VerifyOtp"
+              component={VerifyOtp}
+            />
+             <Stack.Screen
+              options={{
+                headerShown: false,
+                gestureDirection: 'horizontal',
+              }}
+              name="Userprofile1"
+              component={Userprofile1}
+            />
               {/* 
             <Stack.Screen
               options={{

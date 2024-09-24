@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { url } from './url.service';
-import jwt_decode from 'jwt-decode';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { axiosApiInstance } from '../../App';
+import { jwtDecode } from 'jwt-decode';
 let serverUrl = `${url}/users`;
 
 export const registerUser = async obj => {
@@ -80,7 +80,7 @@ export const getDecodedToken = async () => {
   if (!token) {
     return null;
   }
-  let decodedToken = jwt_decode(token);
+  let decodedToken = jwtDecode(token);
   return decodedToken;
 };
 

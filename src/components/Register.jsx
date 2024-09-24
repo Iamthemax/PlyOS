@@ -1,6 +1,6 @@
 import { DarkTheme, useIsFocused, useNavigation } from '@react-navigation/native';
 import React, { useContext, useEffect, useState } from 'react';
-import { FlatList, Image, Linking, Modal, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View, TextInput, ImageBackground } from 'react-native';
+import { FlatList, Image, Linking, Modal, Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View, TextInput, ImageBackground, Platform } from 'react-native';
 import DocumentPicker, { isInProgress } from 'react-native-document-picker';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import RNFetchBlob from 'rn-fetch-blob';
@@ -24,7 +24,6 @@ import CustomColors from '../styles/CustomColors';
 import ImagePicker from 'react-native-image-crop-picker';
 import CheckBox from '@react-native-community/checkbox';
 
-import { Alert } from 'react-native';
 
 export default function Register() {
   const [value, setValue] = useState(null);
@@ -108,7 +107,7 @@ export default function Register() {
   const [isAuthorized, setIsAuthorized] = useContext(isAuthorisedContext);
 
   const handleSubmit = async () => {
-    console.log('chek btn');
+    console.log('chek btn',termsAccepted);
     // if (`${name}` === '') {
     //   errorToast('Name is Required');
     //   return;
@@ -1033,13 +1032,17 @@ export default function Register() {
             <View style={[{ marginVertical: 20, alignItems: 'center' }]}>
               <View style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', marginBottom: 10, justifyContent: 'center' }}>
                 {/* <CheckBox
-                  status={termsAccepted ? 'checked' : 'unchecked'}
                   onPress={() => {
                     setTermsAccepted(!termsAccepted);
                   }}
-                  color="#B08218"
-                  borderColor="red"
+                  value={termsAccepted}
+                   
                 /> */}
+                  <CheckBox
+    disabled={false}
+    value={termsAccepted}
+    onValueChange={(newValue) => setTermsAccepted(newValue)}
+  />
                 {/* <CheckBox
            checked={termsAccepted}
            onPress={() => {
