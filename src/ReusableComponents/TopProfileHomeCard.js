@@ -6,23 +6,21 @@ import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-nat
 import { Rating } from 'react-native-ratings';
 import CustomColors from '../styles/CustomColors';
 
-const TopProfileHomeCard = ({ title, image, rating, Product, onPress, onCallPress ,item}) => {
-  console.log('og',item);
-  
+const TopProfileHomeCard = ({ title, image, rating, Product, onPress, onCallPress, item }) => {
   const [imageFailed, setImageFailed] = useState(false); // State to track image failure
 
   return (
     <View style={styles1.card1}>
-      <View style={{ flexDirection: 'row', justifyContent: 'flex-end', overflow: 'hidden', width: '87%', right: wp(-11) }}>
-        <View>
+      <View style={{ flexDirection: 'row', justifyContent: 'flex-start', left: wp(13) }}>
+        <View style={{ overflow: 'hidden', width: wp(60) }}>
           <Text style={styles1.cardTitle1} numberOfLines={1} ellipsizeMode="tail">
             {title}
           </Text>
-          <View style={{ alignItems: 'flex-start', flexDirection: 'row' }}>
-            <Rating size={1} imageSize={wp(4)} readonly startingValue={rating} />
-            <Text style={{ fontWeight: '900', fontSize: wp(2.5), marginLeft: wp(1.5) }}>Products {Product}</Text>
+          <View style={{ alignItems: 'flex-start', flexDirection: 'row', marginTop: wp(1) }}>
+            <Rating imageSize={wp(4)} readonly startingValue={rating} />
+            <Text style={styles1.productText}>Products {Product}</Text>
           </View>
-          <View style={{ flexDirection: 'row', margin: wp(3), alignItems: 'flex-start', right: wp(5) }}>
+          <View style={{ flexDirection: 'row', marginTop: wp(3), alignItems: 'flex-start' }}>
             <TouchableOpacity style={styles1.callwrap} onPress={onCallPress}>
               <View style={styles1.iconwrap}>
                 <Image
@@ -36,7 +34,7 @@ const TopProfileHomeCard = ({ title, image, rating, Product, onPress, onCallPres
             </TouchableOpacity>
             <View style={styles1.callwrap1}>
               <TouchableOpacity onPress={onPress}>
-                <Text style={{ fontWeight: '900', color: 'white', paddingLeft: wp(4), paddingRight: wp(4),paddingVertical:wp(1.8) }}>Profile</Text>
+                <Text style={styles1.profileButtonText}>Profile</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -49,8 +47,9 @@ const TopProfileHomeCard = ({ title, image, rating, Product, onPress, onCallPres
           width: wp(25),
           left: -wp(14),
           alignSelf: 'center',
-          borderRadius: 60,
-          elevation: wp(5),
+          justifyContent:'center',
+          borderRadius: wp(12.5),
+          elevation: wp(3),
         }}
       >
         <Image
@@ -85,19 +84,30 @@ const styles1 = StyleSheet.create({
     borderRadius: wp(25),
     borderWidth: wp(1),
     borderColor: 'white',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    alignItems: 'center',
   },
   cardTitle1: {
     fontSize: wp(4),
     fontWeight: 'bold',
     marginVertical: 5,
-    overflow: 'hidden'
+    overflow: 'hidden',
+    flexShrink: 1, // Ensures text will shrink to fit the width
+    width: wp(50), // Limit the width of the title container to prevent overflow
+  },
+  productText: {
+    fontWeight: '900',
+    fontSize: wp(2.5),
+    marginLeft: wp(1.5),
   },
   callwrap: {
-    backgroundColor: '#white',
+    backgroundColor: '#fff',
     borderRadius: wp(9),
     alignItems: 'center',
     marginHorizontal: wp(1.2),
     flexDirection: 'row',
+    paddingVertical: wp(1.2),
   },
   callwrap1: {
     backgroundColor: CustomColors.colorNewButton,
@@ -105,6 +115,7 @@ const styles1 = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: wp(1.2),
     flexDirection: 'row',
+    paddingVertical: wp(1.2),
   },
   iconwrap: {
     height: wp(9),
@@ -112,7 +123,14 @@ const styles1 = StyleSheet.create({
     borderRadius: wp(9),
     backgroundColor: '#39AB68',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+  },
+  profileButtonText: {
+    fontWeight: '900',
+    color: 'white',
+    paddingLeft: wp(4),
+    paddingRight: wp(4),
+    paddingVertical: wp(1.8),
   },
 });
 

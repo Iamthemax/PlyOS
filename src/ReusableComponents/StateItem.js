@@ -29,17 +29,26 @@ const stateStyle = StyleSheet.create({
         marginVertical: widthPercentageToDP(3),
         alignContent: 'center',
         justifyContent: 'center',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        alignContent:'center'
     }
     ,
     image: {
+        
+        alignContent: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        alignContent:'center',
         width: widthPercentageToDP(20),
         height: widthPercentageToDP(20),
         borderRadius: widthPercentageToDP(15),
     },
     title: {
+        alignContent: 'center',
+        justifyContent: 'center',
         alignSelf: 'center',
-        paddingVertical: widthPercentageToDP(3)
+        alignContent:'center',
+        paddingVertical: widthPercentageToDP(2)
     },
     heading: {
 

@@ -50,6 +50,7 @@ import OpportunitiesItem from '../ReusableComponents/OpportunitiesItem';
 import CustomButtonOld from '../ReusableComponents/CustomButtonOld';
 import { getProductYouMayLike } from '../services/Product.service';
 import { stateDetails } from '../services/State.service';
+import Carousel from 'react-native-snap-carousel';
 
 export default function Home() {
   const navigate = useNavigation();
@@ -995,7 +996,7 @@ export default function Home() {
           removeClippedSubviews={true}
           ListHeaderComponent={
             <>
-              {/* <Header slidersection /> */}
+              <Header slidersection />
             </>
           }
           //Footer to show below listview
@@ -1060,7 +1061,7 @@ style={{ marginTop: wp(5), paddingBottom: wp(5) }}
     <CustomButtonNew textSize={wp(4)} text="Add" paddingVertical={wp(2)} paddingHorizontal={wp(6)} onPress={() => GotoAddProduct()} />
   </Pressable>
 </View>
-{/* <Carousel
+<Carousel
   data={advertisementsArr}
   renderItem={renderNewArrivals}
   sliderWidth={wp(100)}
@@ -1075,11 +1076,11 @@ style={{ marginTop: wp(5), paddingBottom: wp(5) }}
   contentContainerStyle={{}
 
   }
-/> */}
+/>
 </LinearGradient>
 
 <Text style={styles1.topprofiletext} >Top Profiles</Text>
-                {/* <Carousel
+                <Carousel
                   data={topprofiles}
                   renderItem={({ item }) => (
                     <TopProfileHomeCard title={item.companyName} image={{ uri: generateImageUrl(item.bannerImage) }} rating={item.rating} Product={item.productsCount} onPress={() => gototopprofile(item)} onCallPress={() => handelcallbtn(item?.phone)} item={item} />
@@ -1094,7 +1095,7 @@ style={{ marginTop: wp(5), paddingBottom: wp(5) }}
                   inactiveSlideScale={0.9}
                   inactiveSlideOpacity={1}
                   contentContainerStyle={{ marginBottom: wp(5) }}
-                /> */}
+                />
 
               
 
@@ -1190,7 +1191,7 @@ style={{ marginTop: wp(5), paddingBottom: wp(5) }}
               <View>
 
                 <Text style={[styles1.headingmain, { marginVertical:wp(5), marginBottom: wp(5) ,alignSelf:'center'}]} numberOfLines={1} ellipsizeMode="tail">States</Text>
-                {/* <Carousel
+                <Carousel
                   data={stateDetailss}
                   renderItem={({ item }) => (
                     <StateItem item={item} onPress={() => { navigate.navigate('VendorListByState', { data: item, xState: item?.stateId?._id }) }}></StateItem>
@@ -1206,7 +1207,7 @@ style={{ marginTop: wp(5), paddingBottom: wp(5) }}
                   inactiveSlideScale={0.60}
                   inactiveSlideOpacity={0.9}
                   contentContainerStyle={{ marginBottom: wp(5) }}
-                /> */}
+                />
               </View>
 
               <View style={[styles.padinghr, { alignSelf: 'center', alignItems: 'center', justifyContent: 'space-between', marginBottom: wp(2), paddingBottom: wp(2.5) }]}>
