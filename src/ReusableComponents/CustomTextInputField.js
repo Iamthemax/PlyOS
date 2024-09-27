@@ -10,7 +10,8 @@ const CustomTextInputField = ({
   validator,
   editable,
   customWidth='100%',
-  
+  onPress,
+  onIconPress,
     ...rest
 }) => {
   const handleOnChangeText = (text) => {
@@ -23,7 +24,7 @@ const CustomTextInputField = ({
       <View style={[styles.container,{width:customWidth,rest,height: wp(11)}]}>
       {imagePath && (
         <View style={styles.iconContainer}>
-          <Image source={imagePath} style={styles.imageStyle} />
+          <Image source={imagePath} style={styles.imageStyle} onPress={onIconPress}/>
         </View>
       )}
       <TextInput
@@ -38,7 +39,9 @@ const CustomTextInputField = ({
             : 'default'
         }
         onChangeText={handleOnChangeText}
+        onPress={onPress}
         {...rest}
+        autoCapitalize="none"
       />
     </View>
   );
@@ -58,8 +61,8 @@ const styles = StyleSheet.create({
     borderRadius:50,
   },
   iconContainer: {
-    height: wp(10), 
-    width: wp(10), 
+    height: wp(13), 
+    width: wp(13), 
     borderRadius: 50,
     margin:1,
     backgroundColor: CustomColors.mattBrownDark,
@@ -70,7 +73,6 @@ const styles = StyleSheet.create({
   input: {
     flex:1,
     fontSize: wp(4),
-
     color: '#000000',
     paddingStart: wp(2),
   },

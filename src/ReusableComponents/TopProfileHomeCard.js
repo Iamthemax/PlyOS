@@ -5,6 +5,8 @@ import { Text } from 'react-native-paper';
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import { Rating } from 'react-native-ratings';
 import CustomColors from '../styles/CustomColors';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const TopProfileHomeCard = ({ title, image, rating, Product, onPress, onCallPress, item }) => {
   const [imageFailed, setImageFailed] = useState(false); // State to track image failure
@@ -23,13 +25,11 @@ const TopProfileHomeCard = ({ title, image, rating, Product, onPress, onCallPres
           <View style={{ flexDirection: 'row', marginTop: wp(3), alignItems: 'flex-start' }}>
             <TouchableOpacity style={styles1.callwrap} onPress={onCallPress}>
               <View style={styles1.iconwrap}>
-                <Image
-                  source={require('../../assets/img/phone.png')} // Replace with your image path
-                  style={{ resizeMode: 'cover', height: wp(7), width: wp(7) }}
-                />
-              </View>
+              <Ionicons  name="call" size={wp(6)} color="#FFFFFF" />
+
+</View>
               <View style={{ paddingLeft: wp(1), paddingRight: wp(3) }}>
-                <Text style={{ fontWeight: '900' }}>Connect</Text>
+                <Text style={{ fontWeight: '900' ,fontSize:wp(3.5)}}>Connect</Text>
               </View>
             </TouchableOpacity>
             <View style={styles1.callwrap1}>
@@ -82,7 +82,7 @@ const styles1 = StyleSheet.create({
     width: wp(25),
     height: wp(25),
     borderRadius: wp(25),
-    borderWidth: wp(1),
+    borderWidth: wp(0.25),
     borderColor: 'white',
     justifyContent: 'center',
     alignSelf: 'center',
@@ -102,7 +102,7 @@ const styles1 = StyleSheet.create({
     marginLeft: wp(1.5),
   },
   callwrap: {
-    backgroundColor: '#fff',
+    backgroundColor: '#F5E5D8',
     borderRadius: wp(9),
     alignItems: 'center',
     marginHorizontal: wp(1.2),
@@ -116,10 +116,11 @@ const styles1 = StyleSheet.create({
     marginHorizontal: wp(1.2),
     flexDirection: 'row',
     paddingVertical: wp(1.2),
+    alignSelf:'center'
   },
   iconwrap: {
-    height: wp(9),
-    width: wp(9),
+    height: wp(8),
+    width: wp(8),
     borderRadius: wp(9),
     backgroundColor: '#39AB68',
     alignItems: 'center',
@@ -130,7 +131,8 @@ const styles1 = StyleSheet.create({
     color: 'white',
     paddingLeft: wp(4),
     paddingRight: wp(4),
-    paddingVertical: wp(1.8),
+    paddingVertical: wp(1),
+    fontSize:wp(3.5)
   },
 });
 

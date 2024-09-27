@@ -51,6 +51,7 @@ import CustomButtonOld from '../ReusableComponents/CustomButtonOld';
 import { getProductYouMayLike } from '../services/Product.service';
 import { stateDetails } from '../services/State.service';
 import Carousel from 'react-native-snap-carousel';
+import LoadingOverlay from '../ReusableComponents/LoadingOverlay';
 
 export default function Home() {
   const navigate = useNavigation();
@@ -83,6 +84,8 @@ export default function Home() {
   const [blogVideoArr, setBlogVideoArr] = useState([]);
   const [likeproductarray, setlikeproductarray] = useState([]);
   const [addressInFromFiled, setAddressInFormFiled] = useState('');
+
+  const [loadingIndicator, setLoadingIndicator] = useState(false)
 
 
 
@@ -212,6 +215,7 @@ export default function Home() {
         productName,
       };
 
+      setLoadingIndicator(true);
       let { data: res } = await addUserRequirement(obj);
 
       if (res.message) {
@@ -222,9 +226,12 @@ export default function Home() {
         setPhone('');
         setAddressInFormFiled('');
         setProductName('');
+        setLoadingIndicator(false)
       }
     } catch (err) {
       errorToast(err);
+      setLoadingIndicator(false);
+
     }
   };
   const handleApplySubmitRequirement = async () => {
@@ -279,23 +286,6 @@ export default function Home() {
     }
   };
 
-  // const handelcallbtn = (phone) => {
-  //   if (isAuthorized) {
-  //     if (!currentUserHasActiveSubscription) {
-  //       errorToast('You do not have a valid subscription to perform this action');
-  //       showSubscriptionToast();
-  //       // navigate.navigate('Subscriptions', { register: false })
-  //       return 0;
-  //     }
-  //     Linking.openURL(`tel:${phone}`);
-  //   }
-  //   else {
-  //     // navigate.navigate('Login')
-  //     errorToast('Please login to access this feature');
-  //     showLoginToast();
-
-  //   }
-  // };
 
   const handelcallbtn = (phone) => {
     if (isAuthorized) {
@@ -351,11 +341,7 @@ export default function Home() {
 
         let { data: res } = await checkForValidSubscriptionAndReturnBoolean(decoded?.userId);
         if (res.data) {
-          console.log(
-            'setCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscription',
-            res.data,
-            'setCurrentUserHasActiveSubscription,setCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscriptionsetCurrentUserHasActiveSubscription',
-          );
+
           setCurrentUserHasActiveSubscription(res.data);
         }
       }
@@ -372,8 +358,7 @@ export default function Home() {
       let { data: res } = await getAllFlashSales('endDate=' + endDate);
       if (res.data) {
         setFlashSalesArr(res.data);
-        console.log('flashArr',JSON.stringify(res.data))
-        console.log('flashArr',res.data.length)
+
 
       }
     } catch (err) {
@@ -430,78 +415,7 @@ export default function Home() {
       errorToast(err);
     }
   };
-  var dummyData = [
-    {
-      __v: 0,
-      _id: '66068293dab9276daca9279a',
-      createdAt: '2024-03-29T08:57:55.419Z',
-      endDate: '2024-04-09T23:59:59.059Z',
-      image: '1711703286896.png',
-      isVideo: false,
-      message: 'Best Quality Product Made In very High Standard Wood ',
-      productId: '65ded48f4052bcfbe3438127',
-      productSlug: 'royal-forest-plywood',
-      startDate: '2024-03-29T00:00:00.000Z',
-      updatedAt: '2024-03-29T09:08:06.899Z',
-      userId: '64f07c1522ee5f347112f95f',
-    },
-    {
-      __v: 0,
-      _id: '66068293dab9276daca9279a',
-      createdAt: '2024-03-29T08:57:55.419Z',
-      endDate: '2024-04-09T23:59:59.059Z',
-      image: '1711703286896.png',
-      isVideo: false,
-      message: 'Best Quality Product Made In very High Standard Wood ',
-      productId: '65ded48f4052bcfbe3438127',
-      productSlug: 'royal-forest-plywood',
-      startDate: '2024-03-29T00:00:00.000Z',
-      updatedAt: '2024-03-29T09:08:06.899Z',
-      userId: '64f07c1522ee5f347112f95f',
-    },
-    {
-      __v: 0,
-      _id: '66068293dab9276daca9279a',
-      createdAt: '2024-03-29T08:57:55.419Z',
-      endDate: '2024-04-09T23:59:59.059Z',
-      image: '1711703286896.png',
-      isVideo: false,
-      message: 'Best Quality Product Made In very High Standard Wood ',
-      productId: '65ded48f4052bcfbe3438127',
-      productSlug: 'royal-forest-plywood',
-      startDate: '2024-03-29T00:00:00.000Z',
-      updatedAt: '2024-03-29T09:08:06.899Z',
-      userId: '64f07c1522ee5f347112f95f',
-    },
-    {
-      __v: 0,
-      _id: '66068293dab9276daca9279a',
-      createdAt: '2024-03-29T08:57:55.419Z',
-      endDate: '2024-04-09T23:59:59.059Z',
-      image: '1711703286896.png',
-      isVideo: false,
-      message: 'Best Quality Product Made In very High Standard Wood ',
-      productId: '65ded48f4052bcfbe3438127',
-      productSlug: 'royal-forest-plywood',
-      startDate: '2024-03-29T00:00:00.000Z',
-      updatedAt: '2024-03-29T09:08:06.899Z',
-      userId: '64f07c1522ee5f347112f95f',
-    },
-    {
-      __v: 0,
-      _id: '66068293dab9276daca9279a',
-      createdAt: '2024-03-29T08:57:55.419Z',
-      endDate: '2024-04-09T23:59:59.059Z',
-      image: '1711703286896.png',
-      isVideo: false,
-      message: 'Best Quality Product Made In very High Standard Wood ',
-      productId: '65ded48f4052bcfbe3438127',
-      productSlug: 'royal-forest-plywood',
-      startDate: '2024-03-29T00:00:00.000Z',
-      updatedAt: '2024-03-29T09:08:06.899Z',
-      userId: '64f07c1522ee5f347112f95f',
-    },
-  ];
+
   useEffect(() => {
     if (focused) {
       handleGetAdvvertisementForHomepage();
@@ -511,54 +425,9 @@ export default function Home() {
     }
   }, [focused]);
 
-  const generateRandomDigits = () => {
-    return Math.floor(Math.random() * (3 - 0 + 1)) + 0;
-  };
-
-  const categoryColorArr = [
-    {
-      bacolor: '#FFF9E6',
-      bgimgcolor2: '#FFE6E6',
-    },
-    {
-      bgimgcolor2: '#DBE8FF',
-      bacolor: '#DFF2FF',
-    },
-    {
-      bgimgcolor2: '#FFE8FD',
-      bacolor: '#FFE6E6',
-    },
-    {
-      bgimgcolor2: '#FFE8FD',
-      bacolor: '#FFE6E6',
-    },
-  ];
-
-  const rendercategory = ({ item, index }) => {
-    // console.log(JSON.stringify(item, null, 2), "item")
-    return (
-      <>
-        {isloding ? (
-          <ShimmerPlaceHolder style={{ width: wp(50), height: hp(27), marginRight: 10 }} />
-        ) : (
-          <TouchableOpacity
-            onPress={() => navigate.navigate('BottomBar', { screen: 'Shop', params: { data: item?._id } })}
-            // style={[styles1.categorybix, {width: wp(75), marginRight:wp(4), paddingBottom: 50, elevation:2, backgroundColor: categoryColorArr[generateRandomDigits()].bacolor, display: 'flex', justifyContent: 'center', alignItems: 'center'}]}>
-            style={[styles1.categorybix, { width: wp(60), marginRight: wp(4), overflow: 'hidden', paddingBottom: 50, elevation: 2, backgroundColor: '#FFF9E6', display: 'flex', justifyContent: 'center', alignItems: 'center' }]}>
-            <Image source={{ uri: generateImageUrl(`${item?.image}`) }} style={[styles1.imgsize, { borderRadius: 10 }]} resizeMode="center" />
-            <Text style={styles1.centername}>{item.name}</Text>
-          </TouchableOpacity>
-        )}
-      </>
-    );
-  };
-  const rendercategorySlider = ({ item, index }) => {
-    // console.log(JSON.stringify(item, null, 2), "item")
-    return <>{isloding ? <ShimmerPlaceHolder style={{ width: wp(50), height: hp(27), marginRight: 10 }} /> : <CategorySlider data={categoryArr}></CategorySlider>}</>;
-  };
   const GotoFlash = () => {
     if (isAuthorized) {
-     if (!currentUserHasActiveSubscription) {
+      if (!currentUserHasActiveSubscription) {
         Alert.alert(
           'Subscription Required',
           'You do not have a valid subscription to perform this action.',
@@ -581,7 +450,7 @@ export default function Home() {
 
     }
     else {
-     Alert.alert(
+      Alert.alert(
         'Login Required',
         'Please login to access this feature.',
         [
@@ -599,8 +468,8 @@ export default function Home() {
     }
   }
   const GotoFlashSaleCallIcon = (item) => {
-    console.log('calldta',item.productId.createdByObj.phone);
-    
+    console.log('calldta', item.productId.createdByObj.phone);
+
     if (isAuthorized) {
       if (!currentUserHasActiveSubscription) {
         Alert.alert(
@@ -624,7 +493,7 @@ export default function Home() {
       handelcallbtn(item?.productId?.createdByObj?.phone)
     }
     else {
-     Alert.alert(
+      Alert.alert(
         'Login Required',
         'Please login to access this feature.',
         [
@@ -646,7 +515,7 @@ export default function Home() {
       navigate.navigate('Productdetails', { data: item?.product?.slug })
     }
     else {
-     Alert.alert(
+      Alert.alert(
         'Login Required',
         'Please login to access this feature.',
         [
@@ -663,56 +532,18 @@ export default function Home() {
       );
     }
   }
-  const renderHighlights = ({ item, index }) => {
-    return (
-      <Pressable onPress={() => navigate.navigate('Productdetails', { data: item.productSlug })} style={styles1.boxproduct}>
-        <Image source={require('../../assets/img/call.png')} style={styles1.imgphone} />
-        {item.isVideo ? (
-          <Video source={{ uri: generateImageUrl(item.image) }} style={{ height: 140, width: '100%' }} resizeMode="cover" loop paused={false} />
-        ) : (
-          // <AutoHeightWebView
-          //   //               javaScriptEnabled={true}
-          //   //               scrollEnabled={false}
-          //   //               allowsFullscreenVideo={true}
-          //   //               userAgent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36
-          //   //  (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"
-          //   source={{uri: generateImageUrl(item.image)}}
-          //   style={{height: 170, width: '100%'}}
-          // />
-          <Image source={{ uri: generateImageUrl(item.image) }} style={styles1.imgfluid} />
-        )}
-        <View style={styles1.infoproduct}>
-          <Text style={styles1.producthead}>{item.message}</Text>
-        </View>
-      </Pressable>
-    );
-  };
+
   const renderProductsYouMayLike = ({ item, index }) => {
-    return <LikeProduct imagePath={{ uri: generateImageUrl(item?.product?.mainImage) }} name={item.productName} location={item.cityName} onCallPress={() => handelcallbtn(item.createdByObj.companyObj.phone)} onGetQuotePress={() => { GotoGetQuote(item) }} onPress={() => navigate.navigate('Productdetails', { data: item?.product?.slug })}/>
-  
+    return <LikeProduct imagePath={{ uri: generateImageUrl(item?.product?.mainImage) }} name={item.productName} location={item.cityName} onCallPress={() => handelcallbtn(item.createdByObj.companyObj.phone)} onGetQuotePress={() => { GotoGetQuote(item) }} onPress={() => navigate.navigate('Productdetails', { data: item?.product?.slug })} />
+
   };
 
   const renderNewArrivals = ({ item, index }) => {
     console.log('zxcv', JSON.stringify(item))
-    // return <NewArrivalProductCardVertical horizontal newProductItem={{ imagePath: require('../../assets/img/ply_sample.png'), isVerified: true, name: item.productSlug, location: 'Nashik' }} ></NewArrivalProductCardVertical>;
-    return <NewArrivalProductCardVertical horizontal newProductItem={item} image={{ uri: generateImageUrl(item?.image) }} onPress={() => navigate.navigate('Productdetails', { data: item.productSlug })} onCallPress={() => handelcallbtn(item?.phone)}></NewArrivalProductCardVertical>;
+    return <NewArrivalProductCardVertical    horizontal newProductItem={item} image={{ uri: generateImageUrl(item?.image) }} onPress={() => navigate.navigate('Productdetails', { data: item.productSlug })} onCallPress={() => handelcallbtn(item?.phone)}></NewArrivalProductCardVertical>;
   };
 
-  const renderProduct = ({ item, index }) => {
-    return (
-      <Pressable onPress={() => navigate.navigate('Productdetails', { data: item.slug })} style={styles1.boxproduct}>
-        <Image source={require('../../assets/img/call.png')} style={styles1.imgphone} />
-        <Image source={{ uri: generateImageUrl(item.mainImage) }} style={styles1.imgfluid} />
-        <View style={styles1.infoproduct}>
-          <Text style={styles1.producthead}>{item.name}</Text>
-          <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={[styles1.producthead, { textDecorationLine: 'line-through' }]}>₹{item?.price}</Text>
-            <Text style={[styles1.producthead, { color: '#B08218', paddingLeft: 5 }]}>₹{item?.sellingprice}</Text>
-          </View>
-        </View>
-      </Pressable>
-    );
-  };
+
 
   const renderFlashSale = ({ item, index }) => {
     return (
@@ -730,36 +561,6 @@ export default function Home() {
       </View>
     );
   };
-
-  const renderSale = ({ item, index }) => {
-    return (
-      <Pressable style={styles1.boxproduct} onPress={() => navigate.navigate('Productdetails', { data: item?.productId?.slug })}>
-        <View style={{ position: 'relative' }}>
-          <Image source={{ uri: generateImageUrl(item?.productId?.mainImage) }} style={styles1.imgfluid} />
-          <View style={{ position: 'absolute', height: '100%', width: '100%', zIndex: 100, backgroundColor: 'rgba(0,0,0,0.6)', borderRadius: 10, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <Text style={{ color: 'white', fontSize: 18, fontWeight: '600' }}>Ends on</Text>
-            <Text style={{ color: 'white' }}>{moment(item.startDate).format('DD / MM / YYYY')}</Text>
-          </View>
-        </View>
-        <View style={[styles1.infoproduct]}>
-          <Text style={[styles1.producthead, { textAlign: 'left', marginBottom: 4, fontFamily: 'Manrope-Bold' }]}>{item?.productId?.name}</Text>
-          <View style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-            <View style={{ display: 'flex', flexDirection: 'row', gap: 3 }}>
-              <Text style={[styles1.producthead, { textDecorationLine: 'line-through' }]}>₹{item?.price}</Text>
-              <Text style={{ fontSize: 9 }}>{item.pricetype ? item.pricetype : ' Sq Ft'}</Text>
-            </View>
-            <View style={{ display: 'flex', flexDirection: 'row', gap: 1 }}>
-              <Text style={[styles1.producthead, { color: '#B08218', paddingLeft: 5 }]}>₹{item?.salePrice}</Text>
-              <Text style={{ fontSize: 9, color: '#B08218' }}>{item.pricetype ? item.pricetype : 'Sq Ft'}</Text>
-            </View>
-          </View>
-        </View>
-      </Pressable>
-    );
-  };
-
-
-
   const renderBlogs = ({ item, index }) => {
     return <BlogsItem item={item}></BlogsItem>;
   };
@@ -774,44 +575,9 @@ export default function Home() {
   };
   const renderOpportunities = ({ item, index }) => {
     return (
-      // <OpportunitiesItem opportunityItem={{ imagePath: { uri: generateImageUrl(item.image) }, title: item.name, isExclusive: true }} onApplyPress={() => applymodal()} ></OpportunitiesItem>
       <OpportunitiesItem opportunityItem={{ imagePath: { uri: generateImageUrl(item?.image) }, title: item.Brand, isExclusive: true, stateName: item?.stateName }} onApplyPress={() => { gotoApplyOpportunities(item) }} ></OpportunitiesItem>
     );
   };
-
-
-
-  const GotoProductspage = () => {
-    navigate.navigate('AllProducts', { type: '' })
-    // if (isAuthorized) {
-    //   // if (!currentUserHasActiveSubscription) {
-    //   //   errorToast('You do not have a valid subscription to perform this action');
-    //   //   navigate.navigate('Subscriptions', { register: false })
-    //   //   return 0;
-    //   // }
-
-    //   navigate.navigate('AllProducts', { type: '' })
-
-    // }
-    // else {
-    //   navigate.navigate('Login')
-    // }
-  }
-  const StartBusiness = () => {
-    if (isAuthorized) {
-      // if (!currentUserHasActiveSubscription) {
-      //   errorToast('You do not have a valid subscription to perform this action');
-      //   navigate.navigate('Subscriptions', { register: false })
-      //   return 0;
-      // }
-
-      navigate.navigate('AllProducts', { type: '' })
-
-    }
-    else {
-      navigate.navigate('Login')
-    }
-  }
   const GotoAddProduct = () => {
     if (isAuthorized) {
       if (!currentUserHasActiveSubscription) {
@@ -838,7 +604,7 @@ export default function Home() {
 
     }
     else {
-     Alert.alert(
+      Alert.alert(
         'Login Required',
         'Please login to access this feature.',
         [
@@ -855,21 +621,7 @@ export default function Home() {
       );
     }
   }
-  const applymodal = () => {
-    if (isAuthorized) {
-      if (!currentUserHasActiveSubscription) {
-        errorToast('You do not have a valid subscription to perform this action');
-        navigate.navigate('Subscriptions', { register: false })
-        return 0;
-      }
-
-      setApplyFromModal(true)
-
-    }
-    else {
-      navigate.navigate('Login')
-    }
-  }
+ 
   const Gotoopportunities = () => {
     if (isAuthorized) {
       if (!currentUserHasActiveSubscription) {
@@ -896,7 +648,7 @@ export default function Home() {
 
     }
     else {
-     Alert.alert(
+      Alert.alert(
         'Login Required',
         'Please login to access this feature.',
         [
@@ -916,7 +668,7 @@ export default function Home() {
 
   const gotoApplyOpportunities = (item) => {
     if (isAuthorized) {
-     if (!currentUserHasActiveSubscription) {
+      if (!currentUserHasActiveSubscription) {
         Alert.alert(
           'Subscription Required',
           'You do not have a valid subscription to perform this action.',
@@ -940,7 +692,7 @@ export default function Home() {
 
     }
     else {
-     Alert.alert(
+      Alert.alert(
         'Login Required',
         'Please login to access this feature.',
         [
@@ -958,37 +710,13 @@ export default function Home() {
     }
   }
 
-
-  // const flatlistref = useRef(null);
-
-  // const handelscroll1 = index => {
-  //   let scrollviewflat = flatlistref.current;
-  //   let newindex = index;
-  //   console.log(newindex, 'chk index');
-  //   scrollviewflat.scrollToIndex({animated: true, index: newindex});
-  // };
-
-  // const sliderimg = [
-  //   ,
-  //   {
-  //     img: require('../../assets/img/headerimg.png'),
-  //   },
-  //   {
-  //     img: require('../../assets/img/videoimg.png'),
-  //   },
-  //   {
-  //     img: require('../../assets/img/Image.png'),
-  //   },
-  // ];
-
   return (
     <>
       <View style={[styles.bgwhite]}>
-        <Pressable onPress={() => navigate.navigate('Search')}>
-          <View style={{ width: wp(90), alignSelf: 'center', marginTop: wp(3) }} onPress={() => navigate.navigate('Search')}>
-            <CustomTextInputField placeholder="Search Here" imagePath={require('../../assets/img/ic_search.png')} editable={false}  ></CustomTextInputField>
-          </View>
-        </Pressable>
+        <LoadingOverlay visible={loadingIndicator} message="Please wait..." />
+        <View style={{ width: wp(90), alignSelf: 'center', marginTop: wp(3), paddingVertical: wp(1.5) }} >
+          <CustomTextInputField placeholder="Search Here" imagePath={require('../../assets/img/ic_search.png')} editable={false} onPress={() => navigate.navigate('Search')}></CustomTextInputField>
+        </View>
         <FlatList
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index}
@@ -1003,105 +731,66 @@ export default function Home() {
 
           ListFooterComponent={
             < >
-              {/* <View style={{width: width}}>
-                <FlatList
-                  data={sliderimg}
-                  ref={flatlistref}
-                  horizontal
-                  showsVerticalScrollIndicator={false}
-                  pagingEnabled
-                  renderItem={({item, index}) => {
-                    return (
-                      <View style={{width: width}}>
-                        <Image source={item.img} style={{height: hp(30), width: wp(95), resizeMode: 'contain'}} />
-                      </View>
-                    );
-                  }}
-                />
-
-                <FlatList
-                  data={sliderimg}
-                  horizontal
-                  showsVerticalScrollIndicator={false}
-                  // pagingEnabled
-                  renderItem={({item, index}) => {
-                    return (
-                      <TouchableOpacity onPress={() => handelscroll1(index)} style={{marginRight: wp(10)}}>
-                        <Image source={item.img} style={{height: wp(20), width: wp(20), resizeMode: 'contain'}} />
-                      </TouchableOpacity>
-                    );
-                  }}
-                />
-              </View> */}
+              { }
 
 
               <>{isloding ? <ShimmerPlaceHolder style={{ width: wp(100), height: wp(22), marginRight: 10 }} /> : <CategorySlider data={categoryArr}></CategorySlider>}</>
-              {/* <FlatList style={[styles.padinghr]}
-                data={categoryArr}
-                keyExtractor={(item, index) => `${index}`}
-                horizontal
-                //  olumns={2}
-                renderItem={rendercategorySlider}
-                // columnWrapperStyle={{justifyContent: 'space-between'}}
-                // scrollEnabled={false} style={{width: '100%'}}
-                contentContainerStyle={{paddingVertical: 5, paddingBottom: 10}}
-              /> */}
 
-<LinearGradient
 
-colors={['#ebbb60', '#E0C7AD', '#F1E8D1']}
-start={{ x: 0, y: 1 }}
-end={{ x: 1, y: 1 }}
-style={{ marginTop: wp(5), paddingBottom: wp(5) }}
->
-<View style={[styles.padinghr, styles1.flexbetwen, { marginBottom: wp(6) }]}>
-  {/* <FadeRibbonText colorStart={CustomColors.mattBrownDark} text={"New Arrival"} paddingHorizontal={wp(10)} fontSize={wp(6)} fontWeight={800} colorEnd='white'></FadeRibbonText> */}
-  <Text style={{ fontSize: wp(6), fontWeight: 800, color: 'white' }}>New Arrivals</Text>
-  <Pressable >
-    <CustomButtonNew textSize={wp(4)} text="Add" paddingVertical={wp(2)} paddingHorizontal={wp(6)} onPress={() => GotoAddProduct()} />
-  </Pressable>
-</View>
-<Carousel
-  data={advertisementsArr}
-  renderItem={renderNewArrivals}
-  sliderWidth={wp(100)}
-  itemWidth={wp(45)}
-  loop={true}
-  autoplay={true}
-  autoplayDelay={1000}
-  autoplayInterval={3000}
-  layout={'default'}
-  inactiveSlideScale={0.78}
-  inactiveSlideOpacity={1}
-  contentContainerStyle={{}
+              <LinearGradient
 
-  }
-/>
-</LinearGradient>
-
-<Text style={styles1.topprofiletext} >Top Profiles</Text>
+                colors={['#ebbb60', '#ebbb60', '#F1E8D1', '#FFF']}
+                start={{ x: 0, y: 1 }}
+                end={{ x: 1, y: 1 }}
+                style={{ marginTop: wp(5), paddingBottom: wp(5) }}
+              >
+                <View style={[styles.padinghr, styles1.flexbetwen, { marginBottom: wp(6) }]}>
+                  <Text style={{ fontSize: wp(6), fontWeight: 800, color: 'white' }}>New Arrivals</Text>
+                  <Pressable >
+                    <CustomButtonNew textSize={wp(4)} text="Add" paddingVertical={wp(2)} paddingHorizontal={wp(6)} onPress={() => GotoAddProduct()} />
+                  </Pressable>
+                </View>
                 <Carousel
-                  data={topprofiles}
-                  renderItem={({ item }) => (
-                    <TopProfileHomeCard title={item.companyName} image={{ uri: generateImageUrl(item.bannerImage) }} rating={item.rating} Product={item.productsCount} onPress={() => gototopprofile(item)} onCallPress={() => handelcallbtn(item?.phone)} item={item} />
-                  )}
+                  data={advertisementsArr}
+                  renderItem={renderNewArrivals}
                   sliderWidth={wp(100)}
-                  itemWidth={wp(80)}
+                  itemWidth={wp(45)}
                   loop={true}
                   autoplay={true}
                   autoplayDelay={1000}
                   autoplayInterval={3000}
                   layout={'default'}
-                  inactiveSlideScale={0.9}
-                  inactiveSlideOpacity={1}
-                  contentContainerStyle={{ marginBottom: wp(5) }}
+                  inactiveSlideScale={0.68}
+                  inactiveSlideOpacity={0.5}
+                  contentContainerStyle={{}
+
+                  }
                 />
+              </LinearGradient>
 
-              
+              <Text style={styles1.topprofiletext} >Top Profiles</Text>
+              <Carousel
+                data={topprofiles}
+                renderItem={({ item }) => (
+                  <TopProfileHomeCard title={item.companyName} image={{ uri: generateImageUrl(item.bannerImage) }} rating={item.rating} Product={item.productsCount} onPress={() => gototopprofile(item)} onCallPress={() => handelcallbtn(item?.phone)} item={item} />
+                )}
+                sliderWidth={wp(100)}
+                itemWidth={wp(80)}
+                loop={true}
+                autoplay={true}
+                autoplayDelay={1000}
+                autoplayInterval={3000}
+                layout={'default'}
+                inactiveSlideScale={0.9}
+                inactiveSlideOpacity={1}
+                contentContainerStyle={{ marginBottom: wp(5) }}
+              />
 
 
 
-            
+
+
+
 
 
               {isAuthorized === 'false' && (
@@ -1110,15 +799,14 @@ style={{ marginTop: wp(5), paddingBottom: wp(5) }}
                 </View>
               )}
 
-         
-               
+
+
 
 
               <LinearGradient
                 colors={['#cc8d19', '#ebbb60', '#F1E8D1']} // Gradient colors (left to right)
-                style={[styles1.tableimagewrap, styles1.padinghr]} // Apply the gradient to this style
-                start={{ x: 0, y: 1 }} // Start point of the gradient
-              // end={{ x: 1, y: 1 }}   // End point of the gradient (horizontal)
+                style={[styles1.tableimagewrap,]} // Apply the gradient to this style
+                start={{ x: 0, y: 1 }} // Start point of the gradient=
               >
 
 
@@ -1128,10 +816,9 @@ style={{ marginTop: wp(5), paddingBottom: wp(5) }}
                   <View style={{ flexDirection: 'row', marginTop: 0 }}>
                     <Text style={{ fontSize: wp(4.5), color: '#FFFFFF', fontWeight: 'bold' }}>Subscription!</Text>
                     <View style={{ alignItems: 'center', justifyContent: 'center', marginHorizontal: wp(1), height: wp(6), width: wp(6) }}>
-                      <Image
-                        source={require('../../assets/img/subicon.png')} // Replace with your image path
-                        style={{ height: 25, width: 25 }}
-                      />
+
+                      <MaterialCommunityIcons name="currency-inr" size={wp(5)} color='black' />
+
                     </View>
 
                   </View>
@@ -1145,34 +832,19 @@ style={{ marginTop: wp(5), paddingBottom: wp(5) }}
                 </View>
 
               </LinearGradient>
-              {/* <LinearGradient
 
-                colors={['#cc8d19', '#E0C7AD', '#F1E8D1', '#FFFFFF']}
-                start={{ x: 0, y: 1 }}
-                end={{ x: 1, y: 1 }}
-                style={{ marginTop: wp(5), paddingBottom: wp(5) }}
-              > */}
-                {/* <View style={styles1.flexbetwen}> 
-                <Text style={styles1.headingmain}>New Products</Text>
-                <Pressable onPress={() => navigate.navigate('AllProducts', {type: ''})}>
-                  <Text style={styles1.viewall}>View All</Text>
+              <View style={[styles.padinghr, styles1.flexbetwen]}>
+                <Text style={[styles1.headingmain, { fontWeight: 800, color: 'black', marginBottom: wp(5) }]}>Flash Sales</Text>
+                <Pressable onPress={() => navigate.navigate('AllProducts')}>
+                  <CustomButtonOld textSize={wp(4)} text={"Add"} onPress={() => { GotoFlash() }}></CustomButtonOld>
                 </Pressable>
               </View>
-              <FlatList style={styles.mttop10} contentContainerStyle={{paddingTop: 5, paddingBottom: 10}} data={advertisementsArr} horizontal renderItem={renderHighlights} keyExtractor={(item, index) => `${index}`} /> */}
+              <View style={{ flexDirection: 'row', paddingHorizontal: wp(2), }}
+              >
+                <FlashSaleComponent style={[styles.padinghr, { position: 'absolute' }]}></FlashSaleComponent>
+                <FlatList style={[styles.mttop10, { paddingHorizontal: wp(4) }]} contentContainerStyle={{ paddingTop: 5, paddingBottom: 10 }} data={flashSalesArr} horizontal renderItem={renderFlashSale} keyExtractor={(item, index) => `${index}`} />
+              </View>
 
-                <View style={[styles.padinghr, styles1.flexbetwen]}>
-                  <Text style={[styles1.headingmain, { fontWeight: 800, color: 'black', marginBottom: wp(5) }]}>Flash Sales</Text>
-                  <Pressable onPress={() => navigate.navigate('AllProducts')}>
-                    <CustomButtonOld textSize={wp(4)} text={"Add"} onPress={() => { GotoFlash() }}></CustomButtonOld>
-                  </Pressable>
-                </View>
-                <View style={{ flexDirection: 'row', paddingHorizontal: wp(2), }}
-                >
-                  <FlashSaleComponent style={[styles.padinghr, { position: 'absolute' }]}></FlashSaleComponent>
-                  <FlatList style={[styles.mttop10, { paddingHorizontal: wp(4) }]} contentContainerStyle={{ paddingTop: 5, paddingBottom: 10 }} data={flashSalesArr} horizontal renderItem={renderFlashSale} keyExtractor={(item, index) => `${index}`} />
-                </View>
-
-              {/* </LinearGradient> */}
 
               <View style={[styles.padinghr, styles1.flexbetwen]}>
                 <Text style={styles1.headingmain}>Products You May Like</Text>
@@ -1190,7 +862,7 @@ style={{ marginTop: wp(5), paddingBottom: wp(5) }}
 
               <View>
 
-                <Text style={[styles1.headingmain, { marginVertical:wp(5), marginBottom: wp(5) ,alignSelf:'center'}]} numberOfLines={1} ellipsizeMode="tail">States</Text>
+                <Text style={[styles1.headingmain, { marginVertical: wp(5), marginBottom: wp(5), alignSelf: 'center' }]} numberOfLines={1} ellipsizeMode="tail">States</Text>
                 <Carousel
                   data={stateDetailss}
                   renderItem={({ item }) => (
@@ -1272,37 +944,7 @@ style={{ marginTop: wp(5), paddingBottom: wp(5) }}
 
 
 
-              <Modal
-                animationType="slide"
-                transparent={true}
-                visible={applyFormModal}
-                onRequestClose={() => {
-                  setApplyFromModal(!applyFormModal);
-                }}>
-                <View style={styles1.centeredView}>
-                  <View style={styles1.containerForm}>
-                    <Text style={styles1.textStyle}>Apply Form</Text>
-                    <View style={styles1.textFieldContainer}>
-                      <View style={{ height: wp(1) }} />
-                      <CustomTextInputField placeholder='Organization Name*' onChangeText={value => setOrganizationName(value)} /><View style={{ height: wp(1)}} />
-                      <CustomTextInputField placeholder='Type*' onChangeText={value => setType(value)} /><View style={{ height: wp(1) }} />
-                      <CustomTextInputField placeholder='Product' onChangeText={value => setProductName(value)} /><View style={{ height: wp(1) }} />
-                      <CustomTextInputField placeholder='Brand' onChangeText={value => setBrand(value)} /><View style={{ height: wp(1) }} />
-                      <CustomTextInputField placeholder='Location' onChangeText={value => setLocation(value)} /><View style={{ height: wp(1) }} />
-                      <CustomTextInputField placeholder='Email' onChangeText={value => setEmail(value)} inputType='email' /><View style={{ height: wp(1) }} />
-                    </View>
-                    <View style={styles1.btnContainer}>
-                      <TouchableOpacity onPress={() => { handleApplySubmitRequirement() }}>
-                        <Text style={{ color: 'white', paddingVertical: wp(4), fontSize: wp(4), fontWeight: 'bold', width: '100%', textAlign: 'center' }}>SUBMIT</Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                  <TouchableOpacity onPress={() => setApplyFromModal(false)} style={{ width: wp(8), height: wp(8), backgroundColor: '#fff', marginTop: 30, borderRadius: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Image source={require('../../assets/img/close.png')} style={{ width: wp(3), height: hp(3) }} resizeMode="contain" />
-                  </TouchableOpacity>
-                </View>
 
-              </Modal>
 
             </>
           }
@@ -1631,31 +1273,30 @@ const styles1 = StyleSheet.create({
     flex: 1,
     height: wp(38),
     backgroundColor: '#3498db',
-    borderRadius: 30,
-    // borderWidth:1,
+    borderRadius: wp(25),
     bordercolor: '#000000',
     marginTop: wp(15),
-    marginHorizontal: wp(1),
-    // flexDirection: 'row',
-    // flexWrap: 'wrap',
-    // alignItems: 'center',
-    justifyContent: "center"
+    marginHorizontal: wp(2),
+    justifyContent: "center",
+    overflow: 'visible',  // Ensure overflow is visible so the image can float outside
+
   },
   image1: {
     width: wp(60),  // Set your desired width
     height: wp(50), // Set your desired height
     resizeMode: 'contain', // Optional: control how the image fits,
     bottom: wp(5),
-    
+    overflow: 'visible'
+
 
   },
   imagewrap: {
-
     justifyContent: 'flex-end',
     alignItems: "flex-end",
     // left: 10,
     // bottom: 60
     position: 'absolute',
+    overflow: 'visible',
     alignSelf: "flex-end",
     // marginLeft:30
   },
@@ -1665,7 +1306,7 @@ const styles1 = StyleSheet.create({
     justifyContent: 'center',
     // top: 120,
     marginTop: wp(15),
-    marginHorizontal: 15,
+    marginHorizontal: wp(1),
     width: wp(60),
 
   },
@@ -1723,64 +1364,4 @@ const styles1 = StyleSheet.create({
     // paddingLeft:wp(10)
   },
 });
-
-
-const DATA1 = [
-  {
-    id: '1',
-    title: 'vishamberjfhdjfhjkdshfjkhsdfkjhdsjkfh 1',
-    image: 'https://imgd.aeplcdn.com/1056x594/n/cw/ec/103795/r15-right-side-view-7.png?isig=0&q=80&wm=3',
-
-  },
-  {
-    id: '2',
-    title: 'vishamberjfhdjfhjkdshfjkhsdfkjhdsjkf 2',
-    image: 'https://imgd.aeplcdn.com/664x374/n/cw/ec/171273/f77-left-side-view.jpeg?isig=0&q=80',
-  },
-  {
-    id: '3',
-    title: 'Card 3',
-    image: 'https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg',
-  },
-  // Add more items as needed
-];
-
-
-const flashSaleData = [
-  {
-    id: '1',
-    title: 'vishamberjfhdjfhjkdshfjkhsdfkjhdsjkfh 1',
-    image: 'https://imgd.aeplcdn.com/1056x594/n/cw/ec/103795/r15-right-side-view-7.png?isig=0&q=80&wm=3',
-
-  },
-  {
-    id: '2',
-    title: 'vishamberjfhdjfhjkdshfjkhsdfkjhdsjkf 2',
-    image: 'https://imgd.aeplcdn.com/664x374/n/cw/ec/171273/f77-left-side-view.jpeg?isig=0&q=80',
-  },
-  {
-    id: '3',
-    title: 'Card 3',
-    image: 'https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg',
-  },
-  // Add more items as needed
-];
-
-
-const dummyNewArrivalData = [
-
-  { "__v": 0, "_id": "66068293dab9276daca9279a", "createdAt": "2024-03-29T08:57:55.419Z", "endDate": "2024-04-09T23:59:59.059Z", "image": "1711703286896.png", "isVideo": false, "message": "Best Quality Product Made In very High Standard Wood ", "productId": "65ded48f4052bcfbe3438127", "productSlug": "royal-forest-plywood", "startDate": "2024-03-29T00:00:00.000Z", "updatedAt": "2024-03-29T09:08:06.899Z", "userId": "64f07c1522ee5f347112f95f" },
-  { "__v": 0, "_id": "66068293dab9276daca9279a", "createdAt": "2024-03-29T08:57:55.419Z", "endDate": "2024-04-09T23:59:59.059Z", "image": "1711703286896.png", "isVideo": false, "message": "Best Quality Product Made In very High Standard Wood ", "productId": "65ded48f4052bcfbe3438127", "productSlug": "royal-forest-plywood", "startDate": "2024-03-29T00:00:00.000Z", "updatedAt": "2024-03-29T09:08:06.899Z", "userId": "64f07c1522ee5f347112f95f" },
-  { "__v": 0, "_id": "66068293dab9276daca9279a", "createdAt": "2024-03-29T08:57:55.419Z", "endDate": "2024-04-09T23:59:59.059Z", "image": "1711703286896.png", "isVideo": false, "message": "Best Quality Product Made In very High Standard Wood ", "productId": "65ded48f4052bcfbe3438127", "productSlug": "royal-forest-plywood", "startDate": "2024-03-29T00:00:00.000Z", "updatedAt": "2024-03-29T09:08:06.899Z", "userId": "64f07c1522ee5f347112f95f" },
-  { "__v": 0, "_id": "66068293dab9276daca9279a", "createdAt": "2024-03-29T08:57:55.419Z", "endDate": "2024-04-09T23:59:59.059Z", "image": "1711703286896.png", "isVideo": false, "message": "Best Quality Product Made In very High Standard Wood ", "productId": "65ded48f4052bcfbe3438127", "productSlug": "royal-forest-plywood", "startDate": "2024-03-29T00:00:00.000Z", "updatedAt": "2024-03-29T09:08:06.899Z", "userId": "64f07c1522ee5f347112f95f" },
-  { "__v": 0, "_id": "66068293dab9276daca9279a", "createdAt": "2024-03-29T08:57:55.419Z", "endDate": "2024-04-09T23:59:59.059Z", "image": "1711703286896.png", "isVideo": false, "message": "Best Quality Product Made In very High Standard Wood ", "productId": "65ded48f4052bcfbe3438127", "productSlug": "royal-forest-plywood", "startDate": "2024-03-29T00:00:00.000Z", "updatedAt": "2024-03-29T09:08:06.899Z", "userId": "64f07c1522ee5f347112f95f" },
-  { "__v": 0, "_id": "66068293dab9276daca9279a", "createdAt": "2024-03-29T08:57:55.419Z", "endDate": "2024-04-09T23:59:59.059Z", "image": "1711703286896.png", "isVideo": false, "message": "Best Quality Product Made In very High Standard Wood ", "productId": "65ded48f4052bcfbe3438127", "productSlug": "royal-forest-plywood", "startDate": "2024-03-29T00:00:00.000Z", "updatedAt": "2024-03-29T09:08:06.899Z", "userId": "64f07c1522ee5f347112f95f" },
-  { "__v": 0, "_id": "66068293dab9276daca9279a", "createdAt": "2024-03-29T08:57:55.419Z", "endDate": "2024-04-09T23:59:59.059Z", "image": "1711703286896.png", "isVideo": false, "message": "Best Quality Product Made In very High Standard Wood ", "productId": "65ded48f4052bcfbe3438127", "productSlug": "royal-forest-plywood", "startDate": "2024-03-29T00:00:00.000Z", "updatedAt": "2024-03-29T09:08:06.899Z", "userId": "64f07c1522ee5f347112f95f" },
-  { "__v": 0, "_id": "66068293dab9276daca9279a", "createdAt": "2024-03-29T08:57:55.419Z", "endDate": "2024-04-09T23:59:59.059Z", "image": "1711703286896.png", "isVideo": false, "message": "Best Quality Product Made In very High Standard Wood ", "productId": "65ded48f4052bcfbe3438127", "productSlug": "royal-forest-plywood", "startDate": "2024-03-29T00:00:00.000Z", "updatedAt": "2024-03-29T09:08:06.899Z", "userId": "64f07c1522ee5f347112f95f" },
-  { "__v": 0, "_id": "66068293dab9276daca9279a", "createdAt": "2024-03-29T08:57:55.419Z", "endDate": "2024-04-09T23:59:59.059Z", "image": "1711703286896.png", "isVideo": false, "message": "Best Quality Product Made In very High Standard Wood ", "productId": "65ded48f4052bcfbe3438127", "productSlug": "royal-forest-plywood", "startDate": "2024-03-29T00:00:00.000Z", "updatedAt": "2024-03-29T09:08:06.899Z", "userId": "64f07c1522ee5f347112f95f" },
-  { "__v": 0, "_id": "66068293dab9276daca9279a", "createdAt": "2024-03-29T08:57:55.419Z", "endDate": "2024-04-09T23:59:59.059Z", "image": "1711703286896.png", "isVideo": false, "message": "Best Quality Product Made In very High Standard Wood ", "productId": "65ded48f4052bcfbe3438127", "productSlug": "royal-forest-plywood", "startDate": "2024-03-29T00:00:00.000Z", "updatedAt": "2024-03-29T09:08:06.899Z", "userId": "64f07c1522ee5f347112f95f" },
-  { "__v": 0, "_id": "66068293dab9276daca9279a", "createdAt": "2024-03-29T08:57:55.419Z", "endDate": "2024-04-09T23:59:59.059Z", "image": "1711703286896.png", "isVideo": false, "message": "Best Quality Product Made In very High Standard Wood ", "productId": "65ded48f4052bcfbe3438127", "productSlug": "royal-forest-plywood", "startDate": "2024-03-29T00:00:00.000Z", "updatedAt": "2024-03-29T09:08:06.899Z", "userId": "64f07c1522ee5f347112f95f" },
-  { "__v": 0, "_id": "66068293dab9276daca9279a", "createdAt": "2024-03-29T08:57:55.419Z", "endDate": "2024-04-09T23:59:59.059Z", "image": "1711703286896.png", "isVideo": false, "message": "Best Quality Product Made In very High Standard Wood ", "productId": "65ded48f4052bcfbe3438127", "productSlug": "royal-forest-plywood", "startDate": "2024-03-29T00:00:00.000Z", "updatedAt": "2024-03-29T09:08:06.899Z", "userId": "64f07c1522ee5f347112f95f" }
-
-];
 

@@ -1,13 +1,13 @@
-import React,{useState,useEffect} from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Image } from "react-native-elements";
 import { Text } from "react-native-paper";
 import { widthPercentageToDP } from "react-native-responsive-screen";
 import { generateImageUrl } from "../services/url.service";
 
-const StateItem = ({ item ,onPress}) => {
-    console.log('item.image', generateImageUrl(item.image));
+const StateItem = ({ item, onPress }) => {
     const [imageFailed, setImageFailed] = useState(false);
+    
     return (
         <TouchableOpacity style={stateStyle.container} onPress={onPress}>
             <Image
@@ -15,45 +15,29 @@ const StateItem = ({ item ,onPress}) => {
                 source={imageFailed ? require('../../assets/img/globe.png') : { uri: generateImageUrl(item?.image) }}
                 onError={() => setImageFailed(true)}
             />
-
-
-            <Text style={stateStyle.title} numberOfLines={2} ellipsizeMode="tail">{item.stateId.name}</Text>
+            <Text style={stateStyle.title} numberOfLines={2} ellipsizeMode="tail">
+                {item.stateId.name}
+            </Text>
         </TouchableOpacity>
     );
 }
 
 const stateStyle = StyleSheet.create({
-
     container: {
         marginHorizontal: widthPercentageToDP(1),
         marginVertical: widthPercentageToDP(3),
-        alignContent: 'center',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        alignContent:'center'
-    }
-    ,
+        alignItems: 'center', // Align children (image and text) to the center
+        justifyContent: 'center', // Vertically center the content
+    },
     image: {
-        
-        alignContent: 'center',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        alignContent:'center',
         width: widthPercentageToDP(20),
         height: widthPercentageToDP(20),
         borderRadius: widthPercentageToDP(15),
     },
     title: {
-        alignContent: 'center',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        alignContent:'center',
-        paddingVertical: widthPercentageToDP(2)
+        paddingVertical: widthPercentageToDP(2),
+        textAlign: 'center', // Center the text itself
     },
-    heading: {
-
-    }
 });
-
 
 export default StateItem;

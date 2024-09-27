@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Dimensions } from 'react-native';
@@ -8,13 +8,20 @@ import CustomButtonOld from './CustomButtonOld.js';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 const screenWidth = Dimensions.get('window').width;
 const screenHeight = Dimensions.get('window').height;
+
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 const LikeProduct = ({ imagePath, name, location, onCallPress, onGetQuotePress }) => {
+    const [imageFailed, setImageFailed] = useState(false); // State to track image failure`
     return (
       <View>
         <View style={styles.container}>
             <View style={styles.elevatedContainer}>
-                <Image style={styles.upperImageStyle} source={imagePath} />
+                <Image
+          source={imageFailed ? require('../../assets/img/logo_1.png') : imagePath} // Fallback to default image
+          resizeMode='contain'
+          style={styles.upperImageStyle}
+          onError={() => setImageFailed(true)} // Set imageFailed to true on error
+        />
                 <View style={styles.textContainer}>
                     <Text style={styles.nameText} numberOfLines={1} ellipsizeMode='tail' >{name}</Text>
                     <View style={styles.locationRow}>
@@ -46,7 +53,8 @@ const styles = StyleSheet.create({
         margin: 5,
         overflow: 'hidden',
         borderColor:'#AEAEAE',
-        borderWidth:wp(0.05)
+        borderWidth:wp(0.1),
+        
     },
     elevatedContainer: {
         flex: 1,

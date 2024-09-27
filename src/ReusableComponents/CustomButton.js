@@ -2,6 +2,7 @@ import React from 'react';
 import { TouchableOpacity, View, Text, StyleSheet, Image } from 'react-native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import CustomColors from '../styles/CustomColors';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const CustomButton = ({
   text,
@@ -16,6 +17,7 @@ const CustomButton = ({
   paddingHorizontal = wp(2),
   paddingVertical = wp(2),
   hasBorder = false,
+  rightIconVector,
   ...rest
 }) => {
   return (
@@ -31,6 +33,11 @@ const CustomButton = ({
           <View style={[styles.iconContainer, { backgroundColor: rightIconBgColor }]}>
             <Image source={rightIcon} style={styles.leftIcon} size={50} />
           </View>
+        )}
+        {rightIconVector && (
+          <View style={[styles.iconContainer, { backgroundColor: rightIconBgColor }]}>
+        <Ionicons  name="call" size={wp(6)} color="#FFFFFF" />
+        </View>
         )}
       </View>
     </TouchableOpacity>
